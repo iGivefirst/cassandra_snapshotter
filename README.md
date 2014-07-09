@@ -124,13 +124,6 @@ If you dont want to use incremental backups, or if for some reason you want to c
 Its not in the scope of this project to clean up your S3 buckets.   
 S3 Lifecycle rules allows you do drop or archive to Glacier object stored based on their age.
 
-###Restore your data###
-cassandra_snaphotter tries to store data and metadata in a way to make restores less painful; There is not (yet) a feature complete restore command; every patch / pull request about this is more than welcome (hint hint).
-
-In case you need, cassandra_snapshotter stores the ring token description every time a backup is done ( you can find it the ring file in the snapshot base path )
-
-The way data is stored on S3 should makes it really easy to use the Node Restart Method (http://www.datastax.com/documentation/cassandra/2.0/webhelp/index.html#cassandra/operations/ops_backup_snapshot_restore_t.html#task_ds_cmf_11r_gk)
-
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/tbarbugli/cassandra_snapshotter/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
