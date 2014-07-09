@@ -30,7 +30,7 @@ Usage
 
 You can see the list of base parameters available via `cassandra-snapshotter --help`.  See also parameters for each of the sub options: backup, list, restore.  For instance `cassandra-snapshotter backup --help`. 
 
-The usage patter is base arguments (e.g. --aws-access-key-id=) , the action (e.g. backup, list, restore), and the sub argements for the action (e.g. --user=).
+The usage pattern is; base arguments (e.g. --aws-access-key-id=), the action (e.g. backup, list, restore), and lastly the sub arguments for the action (e.g. --user=).
 
 ####Create a new backup for *mycluster*:####
 
