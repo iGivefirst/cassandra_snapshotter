@@ -30,6 +30,15 @@ for more details on installing ssh keys:
 
 https://help.ubuntu.com/community/SSH/OpenSSH/Keys
 
+Also in order to not use password you must configure sudo to allow the following commands:
+
+```bash
+backupuser ALL=(ALL) NOPASSWD:/bin/bash -l -c /usr/bin/nodetool *
+backupuser ALL=(ALL) NOPASSWD: /bin/bash -l -c cassandra-snapshotter-agent *
+```
+
+Where `backupuser` is the username that you are using for backups.
+
 Usage
 -----
 
