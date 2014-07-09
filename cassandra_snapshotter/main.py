@@ -9,16 +9,6 @@ from utils import add_s3_arguments
 from utils import base_parser as _base_parser
 from utils import get_s3_connection_host
 from help_action import HelpAction
-#import argparse
-
-#class _HelpAction(argparse._HelpAction):
-#
-#    def __call__(self, parser, namespace, values, option_string=None):
-#        parser.print_help()
-#
-#        print("")
-#        print("Don't forget the base arguments - see cassandra-snapshotter --help")
-#        parser.exit()
 
 def run_backup(args):
     if args.user:
