@@ -37,7 +37,9 @@ The usage patter is base arguments (e.g. --aws-access-key-id=) , the action (e.g
 See: `cassandra-snapshotter backup --help`.
 
 ``` bash
-cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y --s3-bucket-name=Z --s3-bucket-region=eu-west-1 --s3-ssenc --s3-base-path=mycluster backup --hosts=h1,h2,h3,h4 --user=cassandra
+cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y \
+  --s3-bucket-name=Z --s3-bucket-region=eu-west-1 --s3-ssenc \
+  --s3-base-path=mycluster backup --hosts=h1,h2,h3,h4 --user=cassandra
 ```
 
 - connects via ssh to hosts h1,h2,h3,h4 using user cassandra
@@ -51,7 +53,9 @@ cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y --s3-bucke
 This command does not take and arguments beyound what is required, shown via `cassandra-snapshotter --help`
 
 ``` bash
-cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y --s3-bucket-name=Z --s3-bucket-region=eu-west-1 --s3-ssenc --s3-base-path=mycluster list
+cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y \
+  --s3-bucket-name=Z --s3-bucket-region=eu-west-1 --s3-ssenc \
+  --s3-base-path=mycluster list
 ```
 
 ####Restore a backup for *mycluster*:####
@@ -64,7 +68,7 @@ Therefore watch your disk space and have `sstableloader` in your path.
 
 ``` bash
 cassandra-snapshotter --aws-access-key-id=X \
-  --aws-secret-access-key=X \
+  --aws-secret-access-key=Y \
   --s3-bucket-name=your_bucket  --s3-bucket-region=us-west-1 --s3-ssenc \
   --s3-base-path=base_path restore --keyspace=your_keyspace --target-hosts=h1,h2,h3
 ```
