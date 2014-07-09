@@ -1,13 +1,24 @@
 from collections import defaultdict
 from fabric.api import env
 import logging
+from os import path as path
 from snapshotting import BackupWorker, RestoreWorker
 from snapshotting import Snapshot
 from snapshotting import SnapshotCollection
 from utils import add_s3_arguments
 from utils import base_parser as _base_parser
 from utils import get_s3_connection_host
+from help_action import HelpAction
+#import argparse
 
+#class _HelpAction(argparse._HelpAction):
+#
+#    def __call__(self, parser, namespace, values, option_string=None):
+#        parser.print_help()
+#
+#        print("")
+#        print("Don't forget the base arguments - see cassandra-snapshotter --help")
+#        parser.exit()
 
 def run_backup(args):
     if args.user:
@@ -116,10 +127,11 @@ def main():
     subparsers = base_parser.add_subparsers(title='subcommands',
                                        dest='subcommand')
 
-    subparsers.add_parser('list', help='list existing backups')
+    
 
-    backup_parser = subparsers.add_parser('backup', help='create a snapshot')
+    backup_parser = subparsers.add_parser('backup', help="create a backup see - '" + path.basename(__file__) + " backup -h'" , add_help=False)
 
+    backup_parser.add_argument('-h','--help', action=HelpAction, help='prints help')
     # snapshot / backup arguments
     backup_parser.add_argument('--hosts',
                                required=True,
@@ -167,8 +179,15 @@ def main():
                                default=12,
                                help='Number of simultaneous connections to cassandra nodes.')
 
+    list_parser = subparsers.add_parser('list', help="list existing backups see - '" + path.basename(__file__) + " list -h'" ,add_help=False)
+
+    list_parser.add_argument('-h','--help', action=HelpAction, help='prints help')
+
     # restore snapshot arguments
-    restore_parser = subparsers.add_parser('restore', help='restores a snapshot')
+    restore_parser = subparsers.add_parser('restore', help="restores a snapshot see -'" + path.basename(__file__) + " restore -h'" ,add_help=False)
+
+    restore_parser.add_argument('-h','--help', action=HelpAction, help='prints help')
+
     restore_parser.add_argument('--snapshot-name',
                                 default='LATEST',
                                 help='The name (date/time) of the snapshot (and incrementals) to restore')
