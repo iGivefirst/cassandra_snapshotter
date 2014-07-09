@@ -117,9 +117,9 @@ def main():
     subparsers = base_parser.add_subparsers(title='subcommands',
                                        dest='subcommand')
 
-    
 
-    backup_parser = subparsers.add_parser('backup', help="create a backup see - '" + path.basename(__file__) + " backup -h'" , add_help=False)
+    backup_parser = subparsers.add_parser('backup', help="see - 'cassandra-snapshotter backup -h'" , add_help=False, 
+        description="Use 'backup' option to create a cassandra snapshot")
 
     backup_parser.add_argument('-h','--help', action=HelpAction, help='prints help')
     # snapshot / backup arguments
@@ -129,7 +129,7 @@ def main():
 
     backup_parser.add_argument('--keyspaces',
                                default='',
-                               help='The keyspaces to backup (omit to backup all)')
+                               help='The command seperated list of keyspaces or a single keyspace to backup (omit to backup all)')
 
     backup_parser.add_argument('--table',
                                default='',
@@ -169,12 +169,14 @@ def main():
                                default=12,
                                help='Number of simultaneous connections to cassandra nodes.')
 
-    list_parser = subparsers.add_parser('list', help="list existing backups see - '" + path.basename(__file__) + " list -h'" ,add_help=False)
+    list_parser = subparsers.add_parser('list', help="see - 'cassandra-snapshotter list -h'" ,add_help=False,
+        description="Use 'list' option to list existing snapshots stored in aws")
 
     list_parser.add_argument('-h','--help', action=HelpAction, help='prints help')
 
     # restore snapshot arguments
-    restore_parser = subparsers.add_parser('restore', help="restores a snapshot see -'" + path.basename(__file__) + " restore -h'" ,add_help=False)
+    restore_parser = subparsers.add_parser('restore', help="see - 'cassandra-snapshotter restore -h'" ,add_help=False,
+        description="Use 'restore' option to restore existing snapshot to specific servers")
 
     restore_parser.add_argument('-h','--help', action=HelpAction, help='prints help')
 
