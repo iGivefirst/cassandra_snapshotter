@@ -28,7 +28,9 @@ Make sure you have JNA enabled and (if you want to use them) that incremental ba
 Usage
 -----
 
-You can see the list of parameters available via `cassandra-snapshotter --help`
+You can see the list of base parameters available via `cassandra-snapshotter --help`.  See also parameters for each of the sub options: backup, list, restore.  For isntance `cassandra-snapshotter backup --help`. 
+
+The usage patter is base arguments (e.g. --aws-access-key-id=) , the action (e.g. backup, list, restore), and the sub argements for the action (e.g. --user=).
 
 ####Create a new backup for *mycluster*:####
 
