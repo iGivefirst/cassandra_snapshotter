@@ -28,17 +28,17 @@ Make sure you have JNA enabled and (if you want to use them) that incremental ba
 Usage
 -----
 
-You can see the list of base parameters available via `cassandra-snapshotter --help`.  See also parameters for each of the sub options: backup, list, restore.  For isntance `cassandra-snapshotter backup --help`. 
+You can see the list of base parameters available via `cassandra-snapshotter --help`.  See also parameters for each of the sub options: backup, list, restore.  For instance `cassandra-snapshotter backup --help`. 
 
 The usage patter is base arguments (e.g. --aws-access-key-id=) , the action (e.g. backup, list, restore), and the sub argements for the action (e.g. --user=).
 
 ####Create a new backup for *mycluster*:####
 
+See: `cassandra-snapshotter backup --help`.
 
 ``` bash
 cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y --s3-bucket-name=Z --s3-bucket-region=eu-west-1 --s3-ssenc --s3-base-path=mycluster backup --hosts=h1,h2,h3,h4 --user=cassandra
 ```
-
 
 - connects via ssh to hosts h1,h2,h3,h4 using user cassandra
 - backups up (using snapshots or incremental backups) on the S3 bucket Z
@@ -48,9 +48,29 @@ cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y --s3-bucke
 
 ####List existing backups for *mycluster*:####
 
+This command does not take and arguments beyound what is required, shown via `cassandra-snapshotter --help`
+
 ``` bash
 cassandra-snapshotter --aws-access-key-id=X --aws-secret-access-key=Y --s3-bucket-name=Z --s3-bucket-region=eu-west-1 --s3-ssenc --s3-base-path=mycluster list
 ```
+
+####Restore a backup for *mycluster*:####
+
+Note: this documentation section is a work in progress.
+
+
+The following command will restore a backup from aws to the cluster. This command will download the ENTIRE snapshot in aws to the server executing this command and then utilize `sstableloader` to restore the cassandra cluster.  
+Therefore watch your disk space and have `sstableloader` in your path.
+
+``` bash
+cassandra-snapshotter --aws-access-key-id=X \
+  --aws-secret-access-key=X \
+  --s3-bucket-name=your_bucket  --s3-bucket-region=us-west-1 --s3-ssenc \
+  --s3-base-path=base_path restore --keyspace=your_keyspace --target-hosts=h1,h2,h3
+```
+
+- connects to aws and downloads the compressed backup
+- connects to each cassandra host using `sstableloader` and restores the backup
 
 ###How it works###
 
