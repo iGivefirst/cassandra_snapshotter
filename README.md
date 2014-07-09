@@ -25,6 +25,11 @@ apt-get install lzop
 
 Make sure you have JNA enabled and (if you want to use them) that incremental backups are enabled in your cassandra config file.
 
+Optionally if you don't want to use a password for the ssh connection, consider using public and private ssh keys.  See the following
+for more details on installing ssh keys:
+
+https://help.ubuntu.com/community/SSH/OpenSSH/Keys
+
 Usage
 -----
 
